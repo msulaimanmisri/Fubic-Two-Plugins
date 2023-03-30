@@ -13,8 +13,8 @@ class enqueueController
 
     public static function loadFubicEnqueue()
     {
-        wp_enqueue_style('sm-fubic-two-style-1', plugin_dir_url(dirname(__FILE__)) . 'assets/css/style.css', '', false, 'all');
-        wp_enqueue_script('sm-fubic-two-js-1', plugin_dir_url(dirname(__FILE__)) . '/assets/js/script.js', ['jquery'], false, true);
+        wp_enqueue_style('fubic-two-style-1', plugin_dir_url(dirname(__FILE__)) . 'assets/css/style.css', '', false, 'all');
+        wp_enqueue_script('fubic-two-script-1', plugin_dir_url(dirname(__FILE__)) . '/assets/js/script.js', ['jquery'], false, true);
     }
 }
 

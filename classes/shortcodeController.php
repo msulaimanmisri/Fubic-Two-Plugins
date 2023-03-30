@@ -13,11 +13,11 @@ class ShortCodeController
 
     public static function showFullName()
     {
-        $current_user = wp_get_current_user();
-        $first_name = $current_user->first_name;
-        $last_name = $current_user->last_name;
+        $currentUser = wp_get_current_user();
+        $firstName = $currentUser->first_name;
+        $lastName = $currentUser->last_name;
 
-        return $first_name . " " . $last_name;
+        return $firstName . " " . $lastName;
     }
 }
 

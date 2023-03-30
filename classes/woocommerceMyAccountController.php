@@ -6,6 +6,7 @@
  */
 class MyAccountController
 {
+
     public static function init()
     {
         add_filter('woocommerce_account_menu_items', [__CLASS__, 'fubicRemoveUserPaymentDetails']);
@@ -61,6 +62,6 @@ class MyAccountController
 }
 
 /**
- * Calling
+ * Calling the initialize method
  */
 MyAccountController::init();
