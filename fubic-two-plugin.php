@@ -4,7 +4,7 @@
  * Plugin Name:       Fubic Two
  * Plugin URI:        https://github.com/Asia-Quest-Malaysia
  * Description:       Compilation of Fubic requirement (Task two) in one single plugin.
- * Version:           1.1
+ * Version:           1.2
  * Author:            Sulaiman Misri
  * Author URI:        https://github.com/msulaimanmisri
  * Text Domain:       sm-fubic-two
