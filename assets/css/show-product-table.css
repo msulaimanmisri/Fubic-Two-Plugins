@@ -1,5 +1,9 @@
 /* This file is related to `change-homepage-view.php` */
 
+#fubic-membership-table {
+    display: inline !important;
+}
+
 #fubic-membership-card {
     display: none !important;
 }

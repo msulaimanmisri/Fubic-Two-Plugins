@@ -3,3 +3,7 @@
 #fubic-membership-table {
     display: none !important;
 }
+
+#fubic-membership-card {
+    display: inline !important;
+}

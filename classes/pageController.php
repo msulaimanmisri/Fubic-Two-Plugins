@@ -22,24 +22,43 @@ class PageController
                 "SELECT meta_key, meta_value
                 FROM {$wpdb->prefix}postmeta AS pm
                 INNER JOIN {$wpdb->prefix}posts AS p ON pm.post_id = p.ID
-                WHERE p.post_author = %d AND pm.meta_key = 'member_expiry'",
+                WHERE p.post_author = %d AND pm.meta_key = 'member_expiry'
+                ORDER BY p.post_date DESC
+                LIMIT 1",
                 $current_user_id
             )
         );
-
         return $results;
+    }
+
+    public static function getTheLatestOrder()
+    {
+        $current_user = get_current_user_id();
+        $orderArgs = [
+            'numberposts' => 1,
+            'meta_key'    => '_customer_user',
+            'meta_value'  => $current_user,
+            'post_type'   => wc_get_order_types(),
+            'post_status' => array_keys(wc_get_order_statuses()),
+        ];
+
+        $getTheLatestOrder = wc_get_orders($orderArgs);
+        $order = array_shift($getTheLatestOrder);
+
+        return $order;
     }
 
     public static function changeHomepageViewBasedOnCondition()
     {
         $results = self::queryTheData();
-
-        if (!is_user_logged_in() || empty($results)) {
-            wp_enqueue_style('fubic-two-style-2', plugin_dir_url(dirname(__FILE__)) . 'assets/css/show-product-table.css', '', false, 'all');
-        }
+        $order = self::getTheLatestOrder();
 
         if (!empty($results)) {
-            wp_enqueue_style('fubic-two-style-3', plugin_dir_url(dirname(__FILE__)) . 'assets/css/hide-product-table.css', '', false, 'all');
+            wp_enqueue_style('fubic-two-style-3', plugin_dir_url(dirname(__FILE__)) . 'assets/css/show-membership-card.css', '', false, 'all');
+        }
+
+        if (!is_user_logged_in() || empty($results) || 'cancelled' === $order->get_status()) {
+            wp_enqueue_style('fubic-two-style-2', plugin_dir_url(dirname(__FILE__)) . 'assets/css/show-product-table.css', '', false, 'all');
         }
     }
 }
