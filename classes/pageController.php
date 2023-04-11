@@ -53,11 +53,23 @@ class PageController
         $results = self::queryTheData();
         $order = self::getTheLatestOrder();
 
+        /**
+         * Case 1
+         * If the user already buy the membership, then :
+         * Hide the #fubic-membership-table.
+         * Show the #fubic-membership-card.
+         */
         if (!empty($results)) {
             wp_enqueue_style('fubic-two-style-3', plugin_dir_url(dirname(__FILE__)) . 'assets/css/show-membership-card.css', '', false, 'all');
         }
 
-        if (!is_user_logged_in() || empty($results) || 'cancelled' === $order->get_status()) {
+        /**
+         * Case 2
+         * If the user is not login OR have an expired Membership, then :
+         * Show the #fubic-membership-table.
+         * Hide the #fubic-membership-card.
+         */
+        if (!is_user_logged_in() || empty($results) || ($order && 'cancelled' == $order->get_status())) {
             wp_enqueue_style('fubic-two-style-2', plugin_dir_url(dirname(__FILE__)) . 'assets/css/show-product-table.css', '', false, 'all');
         }
     }
